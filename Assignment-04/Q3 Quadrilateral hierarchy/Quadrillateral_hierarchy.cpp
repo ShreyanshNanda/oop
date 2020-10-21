@@ -1,102 +1,125 @@
 #include<iostream>
 using namespace std;
 
-class Shape
+class  Quadrilateral
 {
-protected:
-double length;
-double area;
+private:
+int a,b,c,d,h,side;
 public:
-double getLength()
+Quadrilateral(int l, int m, int n, int o)
 {
-return length;
+a=l;
+b=m;
+c=n;
+d=o;
 }
-double getArea()
+Quadrilateral(int l, int m)
 {
-return area;
+a=l;
+b=m;
 }
-};
-class Shape_2D:public Shape
+Quadrilateral(int l)
 {
-protected:
-double perimeter;
-public:
-double getPerimeter()
-{
-return perimeter;
+side = l;
 }
-};
-class Circle: public Shape_2D
+int getPerimeterTrapezoid()
 {
-public:
-Circle( double Radius = 0)
-{
-length = Radius;
-area =3.14*length*length;
-perimeter =3.14*2*length;
+return a+b+c+d;
 }
-};
-class Square: public Shape_2D
+int getAreaTrapezoid()
 {
-public:
-Square( double Size = 0)
-{
-length=Size;
-area=length*length;
-perimeter=4*length;
+return ((a+c)/2)*h;
 }
-};
-class Triangle:public Shape_2D
+int getPerimeterParallelogram()
 {
-public:
-Triangle( double Size = 0)
-{
-length=Size;
-area=0.433*length*length;
-perimeter =3*length;
+return a+b+c+d;
 }
-};
-class Shape_3D:public Shape
+int getAreaParallelogram()
 {
-protected:
-double volume;
-public:
-double getVolume()
+return b*h;
+}
+int getPerimeterRectangle()
 {
-return volume;
-};
-};
-class Cube:public Shape_3D
+return 2*(a+b);
+}
+int getAreaRectangle()
 {
-public:
-Cube( double Size=0)
+return a*b;
+}
+int getPerimeterSquare()
 {
-length=Size;
-area=6*length*length;
-volume=length*length*length;
+return 4*side;
+}
+int getAreaSquare()
+{
+return side*side;
 }
 };
-class Sphere:public Shape_3D
+
+class Trapezoid : public Quadrilateral
 {
 public:
-Sphere( double Radius = 0)
+Trapezoid():Quadrilateral(2,4,2,4)
 {
-length=Radius;
-area=4*3.14*length*length;
-volume=4.0/3*3.14*length*length*length;
+cout<<"Perimeter and Area of Trapezoid: "<<endl;
+}
+int print()
+{
+cout<<"Perimeter of Trapezoid: "<<getPerimeterTrapezoid()<<endl;
+cout<<"Area of Trapezoid: "<<getAreaTrapezoid()<<endl;
 }
 };
+
+class Parallelogram : public Quadrilateral
+{
+public:
+Parallelogram():Quadrilateral(2,4,2,4)
+{
+cout<<"\nPerimeter and Area of Parallelogram"<<endl;
+}
+int print()
+{
+cout<<"Perimeter of Parallelogram: "<<getPerimeterParallelogram()<<endl;
+cout<<"Area of Parallelogram: "<<getAreaParallelogram()<<endl;
+}
+};
+
+class Rectangle : public Quadrilateral
+{
+public:
+Rectangle():Quadrilateral(2,4)
+{
+cout<<"\nPerimeter and Area of Rectangle: "<<endl;
+}
+int print()
+{
+cout<<"Perimeter of Rectangle: "<<getPerimeterRectangle()<<endl;
+cout<<"Area of Rectangle: "<<getAreaRectangle()<<endl;
+}
+};
+
+class Square : public Quadrilateral
+{
+public:
+Square():Quadrilateral(4)
+{
+cout<<"\nPerimeter and Area of Square: "<<endl;
+}
+int print()
+{
+cout<<"Perimeter of Square: "<<getPerimeterSquare()<<endl;
+cout<<"Area of Square: "<<getAreaSquare()<<endl;
+}
+};
+
 int main()
 {
-Circle cir(2);
-cout <<"Circle:\n"<<"  Circumference="<<cir.getPerimeter()<<'\n'<<"  Area="<<cir.getArea()<<'\n';
-Square sq(2);
-cout <<"\nSquare:\n"<<"  Perimeter="<<sq.getPerimeter()<<'\n'<<"  Area="<<sq.getArea()<<'\n';
-Triangle tr(2);
-cout <<"\nTriangle:\n"<<"  Perimeter="<<tr.getPerimeter()<<'\n'<<"  Area="<<tr.getArea()<<'\n';
-Cube cube(2);
-cout <<"\nCube:\n"<<"  Curved Surface Area="<<cube.getArea()<<'\n'<<"  Volume="<<cube.getVolume()<<'\n';
-Sphere sphr(2);
-cout <<"\nSphere:\n"<<"  Curved Surface Area="<<sphr.getArea()<<'\n'<<"  Volume="<<sphr.getVolume()<<'\n';
-return 0;
+Trapezoid t;
+t.print();
+Parallelogram p;
+p.print();
+Rectangle r;
+r.print();
+Square s;
+s.print();
 }
